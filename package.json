@@ -1,0 +1,15 @@
+{
+  "name": "saharaprojects",
+  "version": "1.0.0",
+  "description": "A sahara nodejs package to automate tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayodeji Obasan",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "puppeteer": "^22.10.0"
+  }
+}
