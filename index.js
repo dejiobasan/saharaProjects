@@ -1,8 +1,10 @@
 const puppeteer = require("puppeteer");
 require("dotenv").config();
 
-async () => {
-  const browser = await puppeteer.launch({ headless: false });
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: false
+  });
 
   const page = await browser.newPage();
 
@@ -12,8 +14,12 @@ async () => {
 
   await page.waitForSelector("form");
 
-  await page.type("inputClass", process.env.USERNAME);
-  await page.type("inputClass", process.env.PASSWORD);
+  //   await page.type("email", process.env.USERNAME);
+  //   await page.type("password", process.env.PASSWORD);
+  await page.locator("input").fill(process.env.USERNAME);
+  await page.locator('input').fill(process.env.PASSWORD);
 
-  await page.click("submitButton"); //click login button
-};
+  await page.screenshot({ path: "IEPAGE.png" });
+
+  //   await page.click("login"); //click login button
+})();
