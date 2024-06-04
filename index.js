@@ -12,8 +12,8 @@ async () => {
 
   await page.waitForSelector("form");
 
-  await page.type("#username", process.env.USERNAME);
-  await page.type("#password", process.env.PASSWORD);
+  await page.type("inputClass", process.env.USERNAME);
+  await page.type("inputClass", process.env.PASSWORD);
 
   await page.click("submitButton"); //click login button
 };
