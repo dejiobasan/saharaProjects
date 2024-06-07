@@ -15,7 +15,7 @@ require("dotenv").config();
   await context.overridePermissions(process.env.URL, ["geolocation"]);
 
   const page = await browser.newPage();
-  const width = 1080;
+  const width = 1300;
   const height = 1024;
 
   await page.setViewport({
@@ -37,9 +37,18 @@ require("dotenv").config();
 
   await page.click("#login"); //click login button
 
-  await page.waitForSelector("h1")
+  await page.waitForSelector('button');
 
-  await page.locator('button').click();
+  const buttons = await page.$$('button'); //gets all the button on that page
+  
+  console.log(`Number of buttons found: ${buttons.length}`);
 
-//   const buttons = await page.$$("button");
+  if (buttons.length > 1) {
+    await buttons[1].click();
+    console.log('Second button clicked.');
+  } else {
+    console.log("less than two buttons found on the page.");
+  }
+
+
 })();
