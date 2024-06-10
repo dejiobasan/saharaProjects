@@ -54,15 +54,22 @@ require("dotenv").config();
   
   await buttons[2].click();
 
-  // await page.type("#search", "IKEJA");
+  await page.waitForNavigation({
+    waitUntil: 'networkidle0'
+  });
 
   await page.locator("#search").fill("IKEJA");
 
-  // await page.waitForNavigation({
-  //   waitUntil: 'networkidle0'
-  // });
+  const buttons1 = await page.$$('button');//gets all the button on that page
 
-  const buttons1 = await page.$$('button'); //gets all the button on that page
+  for (const button of buttons1) {
+    const isDisabled = await button.evaluate(b => b.disabled);
+    if (!isDisabled) {
+      await button.click();
+      console.log("Enabled button clicked.");
+      break;
+    }
+  }
   
   console.log(`Number of buttons found: ${buttons1.length}`);
 
@@ -71,7 +78,7 @@ require("dotenv").config();
     console.log(`Button ${i + 1}: ${buttonText}`);
   }
 
-  await buttons1[5].click();
+  // await buttons1[5].click();
 
   // const filterbuttons = await page.$$(".filterButton")
 
