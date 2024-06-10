@@ -37,18 +37,58 @@ require("dotenv").config();
 
   await page.click("#login"); //click login button
 
-  await page.waitForSelector('button');
+  await page.waitForNavigation({
+    waitUntil: 'networkidle0'
+  });
+
+  await page.waitForSelector("h1");
 
   const buttons = await page.$$('button'); //gets all the button on that page
   
   console.log(`Number of buttons found: ${buttons.length}`);
 
-  if (buttons.length > 1) {
-    await buttons[1].click();
-    console.log('Second button clicked.');
-  } else {
-    console.log("less than two buttons found on the page.");
+  for (let i = 0; i < buttons.length; i++) {
+    const buttonText = await page.evaluate(el => el.innerText, buttons[i]);
+    console.log(`Button ${i + 1}: ${buttonText}`);
+  }
+  
+  await buttons[2].click();
+
+  // await page.type("#search", "IKEJA");
+
+  await page.locator("#search").fill("IKEJA");
+
+  // await page.waitForNavigation({
+  //   waitUntil: 'networkidle0'
+  // });
+
+  const buttons1 = await page.$$('button'); //gets all the button on that page
+  
+  console.log(`Number of buttons found: ${buttons1.length}`);
+
+  for (let i = 0; i < buttons1.length; i++) {
+    const buttonText = await page.evaluate(el => el.innerText, buttons1[i]);
+    console.log(`Button ${i + 1}: ${buttonText}`);
   }
 
+  await buttons1[5].click();
+
+  // const filterbuttons = await page.$$(".filterButton")
+
+  // console.log(filterbuttons);
+
+  // await filterbuttons[0].click()
+
+  // await page.waitForSelector(`${filterbuttons[0]}`);
+
+  // await page.click(".filterButton");
+
+  // await buttons1[6].click();
+
+  // await buttons1[7].click();
+
+  // await buttons1[13].click();
+
+  // await buttons1[14].click();
 
 })();
