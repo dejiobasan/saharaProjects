@@ -54,29 +54,32 @@ require("dotenv").config();
   
   await buttons[2].click();
 
-  await page.waitForNavigation({
-    waitUntil: 'networkidle0'
-  });
-
   await page.locator("#search").fill("IKEJA");
 
-  const buttons1 = await page.$$('button');//gets all the button on that page
+  const btns = await page.$$('button');//gets all the button on that page
 
-  for (const button of buttons1) {
-    const isDisabled = await button.evaluate(b => b.disabled);
-    if (!isDisabled) {
-      await button.click();
-      console.log("Enabled button clicked.");
-      break;
-    }
-  }
-  
-  console.log(`Number of buttons found: ${buttons1.length}`);
+  console.log(`Number of buttons found: ${btns.length}`);
 
-  for (let i = 0; i < buttons1.length; i++) {
-    const buttonText = await page.evaluate(el => el.innerText, buttons1[i]);
-    console.log(`Button ${i + 1}: ${buttonText}`);
-  }
+  // for (let i = 0; i < btns.length; i++) {
+  //   const buttonText = await page.evaluate(el => el.innerText, btns[i]);
+  //   console.log(`Button ${i + 1}: ${buttonText}`);
+  // };
+
+  await page.locator(".false").click();
+
+  // await page.waitForNavigation({
+  //   waitUntil: 'networkidle0'
+  // });
+
+
+  // for (const btn of btns) {
+  //   const isDisabled = await btn.evaluate(b => b.disabled);
+  //   if (!isDisabled) {
+  //     await btn.click();
+  //     console.log("Enabled button clicked.");
+  //     break;
+  //   }
+  // }
 
   // await buttons1[5].click();
 
