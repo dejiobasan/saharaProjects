@@ -60,38 +60,32 @@ require("dotenv").config();
 
   console.log(`Number of buttons found: ${btns.length}`);
 
-  // for (let i = 0; i < btns.length; i++) {
-  //   const buttonText = await page.evaluate(el => el.innerText, btns[i]);
-  //   console.log(`Button ${i + 1}: ${buttonText}`);
-  // };
+  for (let i = 0; i < btns.length; i++) {
+    const buttonText = await page.evaluate(el => el.innerText, btns[i]);
+    console.log(`Button ${i + 1}: ${buttonText}`);
+  };
 
-  await page.locator(".false").click();
+  await btns[5].click();
 
   // await page.waitForNavigation({
   //   waitUntil: 'networkidle0'
   // });
 
+  const filterbuttons = await page.$$(".filterButton")
 
-  // for (const btn of btns) {
-  //   const isDisabled = await btn.evaluate(b => b.disabled);
-  //   if (!isDisabled) {
-  //     await btn.click();
-  //     console.log("Enabled button clicked.");
-  //     break;
-  //   }
-  // }
+  console.log(filterbuttons.length);
 
-  // await buttons1[5].click();
+  await filterbuttons[0].click()
 
-  // const filterbuttons = await page.$$(".filterButton")
+  await btns[7].click();
 
-  // console.log(filterbuttons);
+  await filterbuttons[1].click();
 
-  // await filterbuttons[0].click()
+  await btns[12].click();
+
+  
 
   // await page.waitForSelector(`${filterbuttons[0]}`);
-
-  // await page.click(".filterButton");
 
   // await buttons1[6].click();
 
@@ -100,5 +94,7 @@ require("dotenv").config();
   // await buttons1[13].click();
 
   // await buttons1[14].click();
+
+
 
 })();
