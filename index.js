@@ -54,36 +54,49 @@ require("dotenv").config();
   
   await buttons[2].click();
 
-  await page.locator("#search").fill("IKEJA");
+  await page.type("#search", "IKEJA")
 
-  const btns = await page.$$('button');//gets all the button on that page
+  await page.waitForFunction(() => {
+    const spans = document.querySelectorAll("span");
+    return Array.from(spans).some(span => span.innerText.toLowerCase() === 'search');
+  });
 
-  console.log(`Number of buttons found: ${btns.length}`);
+  const spans = await page.$$("span");
+  for (const span of spans) {
+    const spanText = await span.evaluate(s => s.innerText);
+    if (spanText.toLowerCase() === 'search') {
+      await span.click();
+      console.log('Span with text "Search" clicked.');
+      break;
+    }
+  }
 
-  for (let i = 0; i < btns.length; i++) {
-    const buttonText = await page.evaluate(el => el.innerText, btns[i]);
-    console.log(`Button ${i + 1}: ${buttonText}`);
-  };
+  // const btns = await page.$$('button');//gets all the button on that page
 
-  await btns[5].click();
+  // console.log(`Number of buttons found: ${btns.length}`);
+
+  // for (let i = 0; i < btns.length; i++) {
+  //   const buttonText = await page.evaluate(el => el.innerText, btns[i]);
+  //   console.log(`Button ${i + 1}: ${buttonText}`);
+  // };
+
+  // await btns[5].click();
 
   // await page.waitForNavigation({
   //   waitUntil: 'networkidle0'
   // });
 
-  const filterbuttons = await page.$$(".filterButton")
+  // const filterbuttons = await page.$$(".filterButton")
 
-  console.log(filterbuttons.length);
+  // console.log(filterbuttons.length);
 
-  await filterbuttons[0].click()
+  // await filterbuttons[0].click()
 
-  await btns[7].click();
+  // await btns[7].click();
 
-  await filterbuttons[1].click();
+  // await filterbuttons[1].click();
 
-  await btns[12].click();
-
-  
+  // await btns[12].click();
 
   // await page.waitForSelector(`${filterbuttons[0]}`);
 
@@ -94,7 +107,4 @@ require("dotenv").config();
   // await buttons1[13].click();
 
   // await buttons1[14].click();
-
-
-
 })();
