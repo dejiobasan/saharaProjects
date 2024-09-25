@@ -27,7 +27,14 @@ dotenv.config();
     height: Math.ceil(height),
   });
 
+  await page.goto(url as string);
+
+  await page.waitForSelector("h1");
+
+  await page.waitForSelector(".form");
+
   
+
 
 
 })();

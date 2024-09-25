@@ -11,7 +11,7 @@ const locationofMeter = ["Inside the Building", "on the high wall", "On the Pole
 
 //meter type and verifocation
 if (Meternumber === EDMI[0,1,2,3]) {
-
+    
 }
 
 
